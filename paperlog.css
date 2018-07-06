@@ -14,9 +14,15 @@ hr {
 
 emph {
 	font-style: italic;
+	padding: 0px;
+}
+
+h3 {
+	font-style: italic;
 	font-size: small;
 	padding: 0px;
 }
+
 
 a {
 	color: #ff5252;

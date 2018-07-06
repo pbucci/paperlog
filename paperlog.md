@@ -1,6 +1,6 @@
 ---
 # Feel My Pain: Design and Evaluation of Painpad, a Tangible Device for Supporting Inpatient Self-Logging of Pain
-*Price, Blaine; Kelly, Ryan; Mehta, Vikram; Mccormick, Ciaran; Ahmed, Hanad and Pearce, Oliver (2018)*
+### Price, Blaine; Kelly, Ryan; Mehta, Vikram; Mccormick, Ciaran; Ahmed, Hanad and Pearce, Oliver (2018)
 [https://doi.org/10.1145/3173574.3173743](https://doi.org/10.1145/3173574.3173743)
 
 ## Summary
@@ -12,7 +12,7 @@ The dead-simple interface seems easy to learn, but it seems like there's more to
 ---
 # Exploring the Value of Parent Tracked Baby Data in Interactions with Healthcare Professionals: A Data-Enabled Design Exploration
 
-*van Kollenburg, Bogers, Rutjes, Deckers, Frens, Hummels (2018)*
+### van Kollenburg, Bogers, Rutjes, Deckers, Frens, Hummels (2018)
 [doi.org/10.1145/3173574.3173871](https://doi.org/10.1145/3173574.3173871)
 
 ## Summary
