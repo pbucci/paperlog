@@ -8,21 +8,15 @@ $(document).ready(function() {
     }); 
 });
 
+const wrap = (tag) => (str) => {return "<" + tag + ">" + str + "</" + tag + ">"};
+const link = (str) => {return str.replace( /\[(.*?)\]\((.*?)\)/	, '<a href="$2">$1</a>'		 )};
+const emph = (str) => {return str.replace( /(\*)(.*?)(\*)/g		, '<emph>' + '$2' + '</emph>')};
+const mdsh = (str) => {return str.replace( /\s---\s/g			, '&mdash;'					 )};
 
-function emph(str) {
-	return str.replace(/(\*)(.*?)(\*)/g, '<emph>' + '$2' + '</emph>' );
-}
-
-function em(str) {
-	return str.replace(/\s---\s/g, "&mdash;");
-}
-
-function link(str) {
-	return str.replace(/^\[(.*?)\]\((.*?)\)/, '<a href="$2">$1</a>');
-}
-
-function wrap(tag, str) {
-	return "<" + tag + ">" + str + "</" + tag + ">";
+function h(str) {
+	var level = str.split("").filter( (c) => c == '#' ).length;
+	var ret = wrap("h" + level)(str.substring(level + 1, str.length));
+	return ret;
 }
 
 const compose = (...functions) => args => functions.reduceRight((arg, fn) => fn(arg), args);
@@ -32,21 +26,14 @@ function build(data) {
 	for (var line in split) {
 		var l = split[line];
 		ret = "";
-
-		if (l.slice(0,2) == "# ") {
-			ret = wrap("h1", l.slice(2, l.length));
-		} 
-		else if (l.slice(0,3) == "## ") {
-			ret = wrap("h2", l.slice(3, l.length));
-		} 
-		else if (l.slice(0,4) == "### ") {
-			ret = wrap("h3", l.slice(4, l.length));
+		if (l.charAt(0) == "#") {
+			ret = h(l);
 		}
 		else if (l.slice(0,2) == "--") {
 			ret = "<hr />";
 		} 
 		else {
-			ret = wrap('p', compose(link, emph, em)(l));
+			ret = compose(link, emph, mdsh, wrap('p'))(l);
 		}
 		$("#start").append(ret);
 	}
