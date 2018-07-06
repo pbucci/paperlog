@@ -10,51 +10,43 @@ $(document).ready(function() {
 
 
 function emph(str) {
-	var re = /(\*)(.*?)(\*)/; // so-called immutable, unlike var re = new RegExp('...');
-	while (re.test(str)) {
-		return str.replace(re, '<emph>' + '$2' + '</emph>' );
-	}
-	return str;
+	return str.replace(/(\*)(.*?)(\*)/g, '<emph>' + '$2' + '</emph>' );
 }
 
 function em(str) {
-
+	return str.replace(/\s---\s/g, "&mdash;");
 }
 
+function link(str) {
+	return str.replace(/^\[(.*?)\]\((.*?)\)/, '<a href="$2">$1</a>');
+}
+
+function wrap(tag, str) {
+	return "<" + tag + ">" + str + "</" + tag + ">";
+}
+
+const compose = (...functions) => args => functions.reduceRight((arg, fn) => fn(arg), args);
 
 function build(data) {
 	var split = data.split("\n");
 	for (var line in split) {
 		var l = split[line];
-		ret = ""; 
+		ret = "";
+
 		if (l.slice(0,2) == "# ") {
-			ret = "<h1>" + l.slice(2, l.length) + "</h1>";
+			ret = wrap("h1", l.slice(2, l.length));
 		} 
 		else if (l.slice(0,3) == "## ") {
-			ret = "<h2>" + l.slice(3, l.length) + "</h2>";
+			ret = wrap("h2", l.slice(3, l.length));
 		} 
 		else if (l.slice(0,4) == "### ") {
-			ret = "<h3>" + l.slice(4, l.length) + "</h3>";
+			ret = wrap("h3", l.slice(4, l.length));
 		}
 		else if (l.slice(0,2) == "--") {
 			ret = "<hr />";
 		} 
-		else if (l.slice(0,1) == "[") {
-			var st = l.indexOf("[") + 1;
-			var et = l.indexOf("]");
-			var sl = l.indexOf("(") + 1;
-			var el = l.indexOf(")");
-			ret = '<a href="' + l.slice(sl, el) + '" >' + l.slice(st, et).replace("https://", "").replace("http://", "") + '</a>';	
-		} 
 		else {
-			// while (l.indexOf("*") > -1) {
-			// 	var si = l.indexOf("*");
-			// 	var ei = l.indexOf("*", si + 1);
-			// 	l = l.substr(0, si) + "<emph>" + l.substr(si + 1, ei) + "</emph>" + l.substr(ei + 1, l.length);
-			// }
-			l = emph(l);
-			l = l.replace("---", "–");
-			ret = "<p>" + l + "</p>";
+			ret = wrap('p', compose(link, emph, em)(l));
 		}
 		$("#start").append(ret);
 	}
