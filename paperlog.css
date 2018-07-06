@@ -1,0 +1,47 @@
+body, h1, h2 {
+	font-family: 'Lora', 'Markazi Text', serif;
+	padding: 10px 0 0 0;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 0;
+    padding: 0; 
+}
+
+emph {
+	font-style: italic;
+	font-size: small;
+	padding: 0px;
+}
+
+a {
+	color: #ff5252;
+	font-size: small;
+	padding: 0 0 0 0;
+	line-height: 0;
+}
+
+h1 {
+	font-weight: 500;
+	font-size: x-large
+}
+
+h2 {
+	font-size: large;
+	color: #ff5252;
+	line-height:0;
+	padding-bottom: 0px;
+}
+
+p {
+	font-weight: 400;
+}
+
+
+#start {
+	max-width: 500px;
+}
