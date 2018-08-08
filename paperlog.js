@@ -17,7 +17,7 @@ function h(str) {
 	var level = str.split("").filter( (c) => c == '#' ).length;
 	var ret = wrap("h" + level)(str.substring(level + 1, str.length));
 	if (level == 1) {
-		ret = wrap("div")(ret);
+		ret = wrap("div")(ret)('class="section"');
 	}
 	return ret;
 }
