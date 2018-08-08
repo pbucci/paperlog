@@ -15,7 +15,7 @@ const mdsh = (str) => {return str.replace( /\s?---\s?/g			, '&mdash;'					 )};
 
 function h(str) {
 	var level = str.split("").filter( (c) => c == '#' ).length;
-	var ret = wrap("h" + level)(str.substring(level + 1, str.length))("");
+	var ret = wrap("h" + level)("")(str.substring(level + 1, str.length));
 	// if (level == 1) {
 	// 	ret = wrap("div")(ret)('class="section"');
 	// }
@@ -36,7 +36,7 @@ function buildPage(data) {
 			ret = "<hr />";
 		} 
 		else {
-			ret = compose(link, emph, mdsh, wrap('p')('test'))(l);
+			ret = compose(link, emph, mdsh, wrap('p')('id="test"'))(l);
 		}
 		$("#start").append(ret);
 	}
