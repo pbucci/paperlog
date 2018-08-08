@@ -16,10 +16,10 @@ const mdsh = (str) => {return str.replace( /\s?---\s?/g			, '&mdash;'					 )};
 function h(str) {
 	var level = str.split("").filter( (c) => c == '#' ).length;
 	var opts = "";
+	var ret = wrap("h" + level)("")(str.substring(level + 1, str.length));
 	if (level == 1) {
-		opts = 'class="section"';
+		ret = wrap("div")('class="section"')(ret);
 	}
-	var ret = wrap("h" + level)(opts)(str.substring(level + 1, str.length));
 	return ret;
 }
 
