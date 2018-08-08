@@ -19,10 +19,10 @@ function h(str) {
 	var level = str.split("").filter( (c) => c == '#' ).length;
 	var opts = "";
 	var ret = wrap("h" + level)("")(str.substring(level + 1, str.length));
-	if (level == 1) {
-		if (divcount == 0)
-			ret = '<div class="section"'ret;
-	}
+	// if (level == 1) {
+	// 	if (divcount == 0)
+	// 		ret = '<div class="section"'ret;
+	// }
 	return ret;
 }
 
