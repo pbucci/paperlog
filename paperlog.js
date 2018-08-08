@@ -8,7 +8,7 @@ $(document).ready(function() {
     }); 
 });
 
-const wrap = (tag) => (str) => {return "<" + tag + ">" + str + "</" + tag + ">"};
+const wrap = (tag) => (str) => (opts = "") => {return "<" + tag + opts + " >" + str + "</" + tag + ">"};
 const link = (str) => {return str.replace( /\[(.*?)\]\((.*?)\)/	, '<a href="$2">$1</a>'		 )};
 const emph = (str) => {return str.replace( /(\*)(.*?)(\*)/g		, '<emph>' + '$2' + '</emph>')};
 const mdsh = (str) => {return str.replace( /\s?---\s?/g			, '&mdash;'					 )};
@@ -16,6 +16,9 @@ const mdsh = (str) => {return str.replace( /\s?---\s?/g			, '&mdash;'					 )};
 function h(str) {
 	var level = str.split("").filter( (c) => c == '#' ).length;
 	var ret = wrap("h" + level)(str.substring(level + 1, str.length));
+	if (level == 1) {
+		ret = wrap("div")(ret);
+	}
 	return ret;
 }
 
@@ -37,4 +40,5 @@ function buildPage(data) {
 		}
 		$("#start").append(ret);
 	}
+
 }
