@@ -45,6 +45,7 @@ function buildPage(data) {
 			else {
 				ret = "</div><div><hr />"
 			}
+			hrCount += 1;
 		} 
 		else {
 			ret = compose(link, emph, mdsh, wrap('p')(""))(l);
