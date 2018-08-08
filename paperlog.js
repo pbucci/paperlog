@@ -15,10 +15,11 @@ const mdsh = (str) => {return str.replace( /\s?---\s?/g			, '&mdash;'					 )};
 
 function h(str) {
 	var level = str.split("").filter( (c) => c == '#' ).length;
-	var ret = wrap("h" + level)("")(str.substring(level + 1, str.length));
-	// if (level == 1) {
-	// 	ret = wrap("div")(ret)('class="section"');
-	// }
+	var opts = "";
+	if (level == 1) {
+		opts = 'class="section"';
+	}
+	var ret = wrap("h" + level)(opts)(str.substring(level + 1, str.length));
 	return ret;
 }
 
@@ -36,7 +37,7 @@ function buildPage(data) {
 			ret = "<hr />";
 		} 
 		else {
-			ret = compose(link, emph, mdsh, wrap('p')('id="test"'))(l);
+			ret = compose(link, emph, mdsh, wrap('p')(""))(l);
 		}
 		$("#start").append(ret);
 	}
