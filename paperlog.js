@@ -8,7 +8,7 @@ $(document).ready(function() {
     }); 
 });
 
-const wrap = (tag) => (str) => (opts) => {return "<" + tag + " " + opts + " >" + str + "</" + tag + ">"};
+const wrap = (tag) => (opts) => (str) => {return "<" + tag + " " + opts + " >" + str + "</" + tag + ">"};
 const link = (str) => {return str.replace( /\[(.*?)\]\((.*?)\)/	, '<a href="$2">$1</a>'		 )};
 const emph = (str) => {return str.replace( /(\*)(.*?)(\*)/g		, '<emph>' + '$2' + '</emph>')};
 const mdsh = (str) => {return str.replace( /\s?---\s?/g			, '&mdash;'					 )};
@@ -36,7 +36,7 @@ function buildPage(data) {
 			ret = "<hr />";
 		} 
 		else {
-			ret = compose(link, emph, mdsh, wrap('p'))(l);
+			ret = compose(link, emph, mdsh, wrap('p')('test'))(l);
 		}
 		$("#start").append(ret);
 	}
